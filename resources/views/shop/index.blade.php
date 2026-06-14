@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Boutique — Shop.dz')
+@section('title', 'Boutique — Shop.dz ')
 @section('content')
 
 <div class="flex gap-8">

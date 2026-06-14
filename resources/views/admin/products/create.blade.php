@@ -4,14 +4,12 @@
 
 <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-sm p-8">
     <div class="flex items-center gap-3 mb-8">
-    <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
-        @csrf
-
         <a href="{{ route('admin.products.index') }}" class="text-gray-400 hover:text-pink-600">← Retour</a>
         <h1 class="text-2xl font-bold">➕ Ajouter un produit</h1>
     </div>
 
-    
+    <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
+        @csrf
 
         {{-- Nom --}}
         <div>
@@ -32,10 +30,19 @@
             </select>
         </div>
 
-        {{-- Prix --}}
+        {{-- Prix d'achat --}}
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Prix d'achat (DA) *</label>
+            <input type="number" name="cost_price" value="{{ old('cost_price') }}" step="0.01" min="0" placeholder="800"
+                   class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-pink-300 focus:outline-none @error('cost_price') border-red-400 @enderror">
+            <p class="text-xs text-gray-400 mt-1">Combien vous coûte ce produit (pour calculer le bénéfice)</p>
+            @error('cost_price') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+        </div>
+
+        {{-- Prix de vente --}}
         <div class="flex gap-4">
             <div class="flex-1">
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Prix (DA) *</label>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Prix de vente (DA) *</label>
                 <input type="number" name="price" value="{{ old('price') }}" step="0.01" min="0" placeholder="1500"
                        class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-pink-300 focus:outline-none @error('price') border-red-400 @enderror">
                 @error('price') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror

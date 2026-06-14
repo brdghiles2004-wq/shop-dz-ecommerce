@@ -6,8 +6,7 @@
     <h1 class="text-2xl font-bold mb-6">Commande {{ $order->order_number }}</h1>
 
     <div class="bg-gray-50 rounded-xl p-4 mb-6 text-sm space-y-1">
-        <p><span class="text-gray-500">Client:</span> <strong>{{ $order->user->name }}</strong> — {{ $order->user->email }}</p>
-        <p><span class="text-gray-500">Téléphone:</span> {{ $order->shipping_phone }}</p>
+    <p><span class="text-gray-500">Client:</span> <strong>{{ $order->user?->name ?? 'Invité' }}</strong> — {{ $order->user?->email ?? $order->guest_email ?? '—' }}</p>        <p><span class="text-gray-500">Téléphone:</span> {{ $order->shipping_phone }}</p>
         <p><span class="text-gray-500">Adresse:</span> {{ $order->shipping_address }}, {{ $order->shipping_city }}, {{ $order->wilaya }}</p>
         @if($order->notes)
         <p><span class="text-gray-500">Notes:</span> {{ $order->notes }}</p>

@@ -61,8 +61,7 @@
             @foreach($recentOrders as $order)
             <tr class="hover:bg-gray-50">
                 <td class="px-5 py-3 font-mono font-bold text-pink-600">{{ $order->order_number }}</td>
-                <td class="px-5 py-3">{{ $order->user->name }}</td>
-                <td class="px-5 py-3 font-bold">{{ number_format($order->total, 0) }} DA</td>
+                <td class="px-5 py-3">{{ $order->user?->name ?? $order->guest_email ?? 'Invité' }}</td>                <td class="px-5 py-3 font-bold">{{ number_format($order->total, 0) }} DA</td>
                 <td class="px-5 py-3">{{ $order->status_label }}</td>
                 <td class="px-5 py-3 text-gray-500">{{ $order->created_at->format('d/m/Y') }}</td>
                 <td class="px-5 py-3">

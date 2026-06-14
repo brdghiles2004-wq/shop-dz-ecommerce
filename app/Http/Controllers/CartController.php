@@ -42,7 +42,9 @@ class CartController extends Controller
             ]));
         }
 
-        return redirect()->back()->with('success', 'Produit ajouté au panier !');
+        // ← yrou7 direct l panier
+        return redirect()->route('cart.index')
+            ->with('success', 'Produit ajouté au panier ! 🛒');
     }
 
     public function update(Request $request, Cart $cart)

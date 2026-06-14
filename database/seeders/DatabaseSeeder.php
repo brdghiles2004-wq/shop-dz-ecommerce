@@ -21,4 +21,12 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
         ]);
     }
+
 }
+
+$this->call([
+    AdminSeeder::class,
+    CategorySeeder::class,
+    ProductSeeder::class,
+    WilayaSeeder::class, // ← zidha
+]);

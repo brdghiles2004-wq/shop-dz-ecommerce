@@ -23,6 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
+        'avatar',
+        'last_seen_support',
     ];
 
     /**
@@ -47,4 +49,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+
+    public function orders()
+{
+    return $this->hasMany(Order::class);
 }
+}
+

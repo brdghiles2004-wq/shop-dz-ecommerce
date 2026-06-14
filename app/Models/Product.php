@@ -8,7 +8,7 @@ class Product extends Model
 {
     protected $fillable = [
         'category_id', 'name', 'slug', 'description',
-        'price', 'sale_price', 'stock', 'image', 'is_active', 'is_featured'
+        'price', 'cost_price', 'sale_price', 'stock', 'image', 'is_active', 'is_featured'
     ];
 
     protected $casts = [

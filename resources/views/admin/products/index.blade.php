@@ -2,6 +2,10 @@
 @section('title', 'Produits Admin')
 @section('content')
 
+<div class="mb-4">
+    <a href="{{ route('admin.dashboard') }}" class="text-gray-400 hover:text-pink-600 text-sm">← Dashboard</a>
+</div>
+
 <div class="flex justify-between items-center mb-6">
     <h1 class="text-2xl font-bold">📦 Produits</h1>
     <a href="{{ route('admin.products.create') }}" class="bg-pink-600 text-white px-5 py-2 rounded-lg hover:bg-pink-700 font-bold">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Panier — Shop.dz')
+@section('title', 'Mon Panier🛒— Shop.dz')
 @section('content')
 
 <h1 class="text-2xl font-bold mb-6">🛒 Mon Panier</h1>

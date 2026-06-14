@@ -28,6 +28,7 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'name'        => 'required|string|max:200',
             'description' => 'nullable|string',
+            'cost_price'  => 'required|numeric|min:0',
             'price'       => 'required|numeric|min:0',
             'sale_price'  => 'nullable|numeric|min:0',
             'stock'       => 'required|integer|min:0',
@@ -36,9 +37,9 @@ class ProductController extends Controller
             'is_featured' => 'boolean',
         ]);
 
-        $data['slug']       = Str::slug($request->name);
-        $data['is_active']  = $request->boolean('is_active');
-        $data['is_featured']= $request->boolean('is_featured');
+        $data['slug']        = Str::slug($request->name);
+        $data['is_active']   = $request->boolean('is_active');
+        $data['is_featured'] = $request->boolean('is_featured');
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('products', 'public');
@@ -62,6 +63,7 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'name'        => 'required|string|max:200',
             'description' => 'nullable|string',
+            'cost_price'  => 'required|numeric|min:0',
             'price'       => 'required|numeric|min:0',
             'sale_price'  => 'nullable|numeric|min:0',
             'stock'       => 'required|integer|min:0',
@@ -70,8 +72,8 @@ class ProductController extends Controller
             'is_featured' => 'boolean',
         ]);
 
-        $data['is_active']  = $request->boolean('is_active');
-        $data['is_featured']= $request->boolean('is_featured');
+        $data['is_active']   = $request->boolean('is_active');
+        $data['is_featured'] = $request->boolean('is_featured');
 
         if ($request->hasFile('image')) {
             if ($product->image) Storage::disk('public')->delete($product->image);
