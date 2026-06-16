@@ -37,10 +37,18 @@
                {{ request()->is('admin/categories*') ? 'bg-pink-700 text-white' : 'text-pink-200 hover:bg-pink-800' }}">
                 🏷️ Catégories
             </a>
+
+            {{-- Commandes avec badge pending --}}
             <a href="{{ route('admin.orders.index') }}"
-               class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition
+               class="flex items-center justify-between px-4 py-2.5 rounded-lg text-sm font-medium transition
                {{ request()->is('admin/orders*') ? 'bg-pink-700 text-white' : 'text-pink-200 hover:bg-pink-800' }}">
-                📋 Commandes
+                <span>📋 Commandes</span>
+                @php $newOrders = \App\Models\Order::where('status', 'pending')->count(); @endphp
+                @if($newOrders > 0)
+                    <span class="bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                        {{ $newOrders > 9 ? '9+' : $newOrders }}
+                    </span>
+                @endif
             </a>
 
             {{-- Support avec badge tickets en attente --}}
