@@ -16,6 +16,9 @@ class DashboardController extends Controller
             'total_products'  => Product::count(),
             'total_users'     => User::where('is_admin', false)->count(),
             'revenue'         => Order::where('status', 'delivered')->sum('total'),
+            'new_users_today' => User::where('is_admin', false)
+                                    ->whereDate('created_at', today())
+                                    ->count(),
         ];
 
         $recentOrders = Order::with('user')->latest()->take(10)->get();

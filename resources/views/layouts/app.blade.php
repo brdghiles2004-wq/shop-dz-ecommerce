@@ -43,19 +43,6 @@
                 📋 Commandes
             </a>
 
-            <a href="{{ route('admin.stats.index') }}"
-                class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition
-                {{ request()->is('admin/stats*') ? 'bg-pink-700 text-white' : 'text-pink-200 hover:bg-pink-800' }}">
-              📊 Statistiques
-</a>
-<a href="{{ route('admin.users.index') }}"
-   class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition
-   {{ request()->is('admin/users*') ? 'bg-pink-700 text-white' : 'text-pink-200 hover:bg-pink-800' }}">
-    👥 Clients
-</a>
-
-            
-
             {{-- Support avec badge tickets en attente --}}
             <a href="{{ route('admin.support.index') }}"
                class="flex items-center justify-between px-4 py-2.5 rounded-lg text-sm font-medium transition
@@ -65,6 +52,25 @@
                 @if($openTickets > 0)
                     <span class="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
                         {{ $openTickets }}
+                    </span>
+                @endif
+            </a>
+
+            <a href="{{ route('admin.stats.index') }}"
+               class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition
+               {{ request()->is('admin/stats*') ? 'bg-pink-700 text-white' : 'text-pink-200 hover:bg-pink-800' }}">
+                📊 Statistiques
+            </a>
+
+            {{-- Clients avec badge nouveaux clients aujourd'hui --}}
+            <a href="{{ route('admin.users.index') }}"
+               class="flex items-center justify-between px-4 py-2.5 rounded-lg text-sm font-medium transition
+               {{ request()->is('admin/users*') ? 'bg-pink-700 text-white' : 'text-pink-200 hover:bg-pink-800' }}">
+                <span>👥 Clients</span>
+                @php $newUsers = \App\Models\User::where('is_admin', false)->whereDate('created_at', today())->count(); @endphp
+                @if($newUsers > 0)
+                    <span class="bg-green-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                        {{ $newUsers }}
                     </span>
                 @endif
             </a>
@@ -118,14 +124,12 @@
                 @endif
             </a>
             <a href="{{ route('orders.index') }}" class="hover:text-pink-600">Mes commandes</a>
-            
             <a href="{{ route('profile.index') }}" class="flex items-center gap-2 hover:text-pink-600">
-    @if(auth()->user()->avatar)
-        <img src="{{ auth()->user()->avatar }}" class="w-6 h-6 rounded-full">
-    @endif
-    Mon profil
-</a>
-
+                @if(auth()->user()->avatar)
+                    <img src="{{ auth()->user()->avatar }}" class="w-6 h-6 rounded-full">
+                @endif
+                Mon profil
+            </a>
 
             {{-- Support avec badge notification client --}}
             @php
