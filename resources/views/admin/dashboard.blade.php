@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', '💄 Dashboard | Shop.dz')
+@section('title', 'Dashboard | Shop.dz')
 @section('content')
 
 <div class="flex items-center justify-between mb-8">

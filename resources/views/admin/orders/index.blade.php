@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', '💄 Commandes Admin')
+@section('title', ' Commandes Admin')
 @section('content')
 
 <div class="mb-4">
@@ -55,4 +55,4 @@
     <div class="p-4">{{ $orders->links() }}</div>
 </div>
 
-@endsection
+@endsections

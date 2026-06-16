@@ -1,12 +1,13 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ProductController extends Controller
 {
@@ -41,8 +42,16 @@ class ProductController extends Controller
         $data['is_active']   = $request->boolean('is_active');
         $data['is_featured'] = $request->boolean('is_featured');
 
+        // 🟢 UPLOAD TO CLOUDINARY
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('products', 'public');
+            $uploaded = Cloudinary::upload(
+                $request->file('image')->getRealPath(),
+                [
+                    'folder' => 'shop-dz-products'
+                ]
+            );
+
+            $data['image'] = $uploaded->getSecurePath();
         }
 
         Product::create($data);
@@ -75,9 +84,16 @@ class ProductController extends Controller
         $data['is_active']   = $request->boolean('is_active');
         $data['is_featured'] = $request->boolean('is_featured');
 
+        // 🟢 UPDATE IMAGE ON CLOUDINARY
         if ($request->hasFile('image')) {
-            if ($product->image) Storage::disk('public')->delete($product->image);
-            $data['image'] = $request->file('image')->store('products', 'public');
+            $uploaded = Cloudinary::upload(
+                $request->file('image')->getRealPath(),
+                [
+                    'folder' => 'shop-dz-products'
+                ]
+            );
+
+            $data['image'] = $uploaded->getSecurePath();
         }
 
         $product->update($data);
@@ -88,8 +104,9 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        if ($product->image) Storage::disk('public')->delete($product->image);
+        // ⚠️ Cloudinary: image deletion optional (we skip for simplicity)
         $product->delete();
+
         return redirect()->route('admin.products.index')
             ->with('success', 'Produit supprimé.');
     }

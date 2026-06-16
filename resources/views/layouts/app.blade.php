@@ -18,7 +18,7 @@
     {{-- Sidebar --}}
     <aside class="w-56 bg-pink-900 text-white flex flex-col fixed h-full">
         <div class="p-5 border-b border-pink-800">
-            <a href="{{ route('home') }}" class="text-xl font-bold">Shop.dz 💄</a>
+            <a href="{{ route('home') }}" class="text-xl font-bold">Shop.dz </a>
             <p class="text-pink-300 text-xs mt-1">Panel Admin</p>
         </div>
         <nav class="flex-1 p-4 space-y-1">
@@ -183,7 +183,7 @@
 </main>
 
 <footer class="bg-pink-900 text-white mt-16 py-10 text-center">
-    <p class="text-lg font-bold">Shop.dz 💄</p>
+    <p class="text-lg font-bold">Shop.dz </p>
     <p class="text-pink-200 text-sm mt-1">© {{ date('Y') }} Shop.dz — Cosmétiques Algérie</p>
 </footer>
 
@@ -192,7 +192,7 @@
 {{-- Guest --}}
 <nav class="bg-white shadow-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
-        <a href="{{ route('home') }}" class="text-2xl font-bold text-pink-600">Shop.dz 💄</a>
+        <a href="{{ route('home') }}" class="text-2xl font-bold text-pink-600">Shop.dz </a>
         <div class="flex items-center gap-6 text-sm">
             <a href="{{ route('shop.index') }}" class="hover:text-pink-600 font-medium">Boutique</a>
             <a href="{{ route('cart.index') }}" class="relative hover:text-pink-600">
@@ -222,7 +222,7 @@
 </main>
 
 <footer class="bg-pink-900 text-white mt-16 py-10 text-center">
-    <p class="text-lg font-bold">Shop.dz 💄</p>
+    <p class="text-lg font-bold">Shop.dz </p>
     <p class="text-pink-200 text-sm mt-1">© {{ date('Y') }} Shop.dz — Cosmétiques Algérie</p>
 </footer>
 
