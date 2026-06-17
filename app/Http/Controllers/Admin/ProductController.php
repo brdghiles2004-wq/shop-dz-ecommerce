@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -33,7 +32,7 @@ class ProductController extends Controller
             'price'       => 'required|numeric|min:0',
             'sale_price'  => 'nullable|numeric|min:0',
             'stock'       => 'required|integer|min:0',
-            'image'       => 'nullable|image|max:2048',
+            'image'       => 'nullable|image|max:4096',
             'is_active'   => 'boolean',
             'is_featured' => 'boolean',
         ]);
@@ -42,15 +41,10 @@ class ProductController extends Controller
         $data['is_active']   = $request->boolean('is_active');
         $data['is_featured'] = $request->boolean('is_featured');
 
-        // 🟢 UPLOAD TO CLOUDINARY
         if ($request->hasFile('image')) {
-            $uploaded = Cloudinary::upload(
-                $request->file('image')->getRealPath(),
-                [
-                    'folder' => 'shop-dz-products'
-                ]
-            );
-
+            $uploaded = Cloudinary::upload($request->file('image')->getRealPath(), [
+                'folder' => 'shop-dz/products',
+            ]);
             $data['image'] = $uploaded->getSecurePath();
         }
 
@@ -76,7 +70,7 @@ class ProductController extends Controller
             'price'       => 'required|numeric|min:0',
             'sale_price'  => 'nullable|numeric|min:0',
             'stock'       => 'required|integer|min:0',
-            'image'       => 'nullable|image|max:2048',
+            'image'       => 'nullable|image|max:4096',
             'is_active'   => 'boolean',
             'is_featured' => 'boolean',
         ]);
@@ -84,15 +78,10 @@ class ProductController extends Controller
         $data['is_active']   = $request->boolean('is_active');
         $data['is_featured'] = $request->boolean('is_featured');
 
-        // 🟢 UPDATE IMAGE ON CLOUDINARY
         if ($request->hasFile('image')) {
-            $uploaded = Cloudinary::upload(
-                $request->file('image')->getRealPath(),
-                [
-                    'folder' => 'shop-dz-products'
-                ]
-            );
-
+            $uploaded = Cloudinary::upload($request->file('image')->getRealPath(), [
+                'folder' => 'shop-dz/products',
+            ]);
             $data['image'] = $uploaded->getSecurePath();
         }
 
@@ -104,9 +93,7 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        // ⚠️ Cloudinary: image deletion optional (we skip for simplicity)
         $product->delete();
-
         return redirect()->route('admin.products.index')
             ->with('success', 'Produit supprimé.');
     }

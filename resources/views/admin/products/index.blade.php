@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Produits Admin')
+@section('title', '💄 Produits Admin')
 @section('content')
 
 <div class="mb-4">
@@ -20,7 +20,8 @@
                 <th class="px-5 py-3 text-left">Image</th>
                 <th class="px-5 py-3 text-left">Nom</th>
                 <th class="px-5 py-3 text-left">Catégorie</th>
-                <th class="px-5 py-3 text-left">Prix</th>
+                <th class="px-5 py-3 text-left">Prix achat</th>
+                <th class="px-5 py-3 text-left">Prix vente</th>
                 <th class="px-5 py-3 text-left">Stock</th>
                 <th class="px-5 py-3 text-left">Actif</th>
                 <th class="px-5 py-3 text-left">Actions</th>
@@ -31,13 +32,14 @@
             <tr class="hover:bg-gray-50">
                 <td class="px-5 py-3">
                     @if($product->image)
-                        <img src="{{ Storage::url($product->image) }}" class="w-12 h-12 object-cover rounded-lg">
+                        <img src="{{ $product->image }}" class="w-12 h-12 object-cover rounded-lg">
                     @else
                         <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center">💄</div>
                     @endif
                 </td>
                 <td class="px-5 py-3 font-semibold">{{ $product->name }}</td>
                 <td class="px-5 py-3 text-gray-500">{{ $product->category->name }}</td>
+                <td class="px-5 py-3 text-gray-500">{{ number_format($product->cost_price, 0) }} DA</td>
                 <td class="px-5 py-3 font-bold text-pink-600">{{ number_format($product->final_price, 0) }} DA</td>
                 <td class="px-5 py-3 {{ $product->stock < 5 ? 'text-red-600 font-bold' : 'text-gray-600' }}">{{ $product->stock }}</td>
                 <td class="px-5 py-3">

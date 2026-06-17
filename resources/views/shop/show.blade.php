@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('title', $product->name . ' — Shop.dz')
+@section('title', $product->name . ' | Shop.dz')
 @section('content')
 
 <div class="bg-white rounded-2xl shadow-sm p-8">
     <div class="grid md:grid-cols-2 gap-10">
         <div>
             @if($product->image)
-                <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" class="w-full rounded-xl">
+                <img src="{{ $product->image }}" alt="{{ $product->name }}" class="w-full rounded-xl">
             @else
                 <div class="w-full h-80 bg-pink-100 rounded-xl flex items-center justify-center text-7xl">💄</div>
             @endif
@@ -47,7 +47,7 @@
         @foreach($related as $p)
         <a href="{{ route('shop.show', $p->slug) }}" class="bg-white rounded-xl shadow-sm hover:shadow-md transition p-3 block">
             @if($p->image)
-                <img src="{{ Storage::url($p->image) }}" class="w-full h-36 object-cover rounded-lg mb-2">
+                <img src="{{ $p->image }}" class="w-full h-36 object-cover rounded-lg mb-2">
             @else
                 <div class="w-full h-36 bg-pink-100 rounded-lg flex items-center justify-center text-3xl mb-2">💄</div>
             @endif

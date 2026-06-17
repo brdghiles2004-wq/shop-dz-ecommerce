@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title', 'Accueil — Shop.dz')
+@section('title', '💄 Accueil | Shop.dz')
 @section('content')
 
 {{-- Hero --}}
 <div class="bg-gradient-to-r from-pink-500 to-pink-700 text-white rounded-2xl p-12 mb-12 text-center">
-    <h1 class="text-4xl font-bold mb-4">Bienvenue sur Shop.dz</h1>
+    <h1 class="text-4xl font-bold mb-4">Bienvenue sur Shop.dz 💄</h1>
     <p class="text-pink-100 text-lg mb-6">Les meilleurs cosmétiques livrés partout en Algérie</p>
     <a href="{{ route('shop.index') }}" class="bg-white text-pink-700 font-bold px-8 py-3 rounded-full hover:bg-pink-50 transition">
         Découvrir la boutique →
@@ -36,7 +36,7 @@
         <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition overflow-hidden">
             <a href="{{ route('shop.show', $product->slug) }}">
                 @if($product->image)
-                    <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" class="w-full h-48 object-cover">
+                    <img src="{{ $product->image }}" alt="{{ $product->name }}" class="w-full h-48 object-cover">
                 @else
                     <div class="w-full h-48 bg-pink-100 flex items-center justify-center text-4xl">💄</div>
                 @endif
@@ -52,7 +52,6 @@
                         <span class="text-gray-400 line-through text-xs">{{ number_format($product->price, 0) }} DA</span>
                     @endif
                 </div>
-                {{-- Bouton ajout direct au panier --}}
                 <form action="{{ route('cart.add') }}" method="POST" class="mt-3">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">

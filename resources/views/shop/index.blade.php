@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Boutique — Shop.dz ')
+@section('title', '💄 Boutique | Shop.dz')
 @section('content')
 
 <div class="flex gap-8">
@@ -23,7 +23,6 @@
 
     {{-- Produits --}}
     <div class="flex-1">
-        {{-- Barre de recherche + tri --}}
         <form method="GET" action="{{ route('shop.index') }}" class="flex gap-3 mb-6">
             <input type="hidden" name="category" value="{{ request('category') }}">
             <input type="text" name="search" value="{{ request('search') }}"
@@ -48,7 +47,7 @@
             <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition overflow-hidden">
                 <a href="{{ route('shop.show', $product->slug) }}">
                     @if($product->image)
-                        <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" class="w-full h-44 object-cover">
+                        <img src="{{ $product->image }}" alt="{{ $product->name }}" class="w-full h-44 object-cover">
                     @else
                         <div class="w-full h-44 bg-pink-100 flex items-center justify-center text-4xl">💄</div>
                     @endif
@@ -75,7 +74,6 @@
             </div>
             @endforeach
         </div>
-
         <div class="mt-8">{{ $products->links() }}</div>
         @endif
     </div>
