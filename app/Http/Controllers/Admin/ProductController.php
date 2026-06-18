@@ -6,7 +6,6 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ProductController extends Controller
 {
@@ -42,10 +41,10 @@ class ProductController extends Controller
         $data['is_featured'] = $request->boolean('is_featured');
 
         if ($request->hasFile('image')) {
-            $uploaded = Cloudinary::upload($request->file('image')->getRealPath(), [
+            $result = cloudinary()->upload($request->file('image')->getRealPath(), [
                 'folder' => 'shop-dz/products',
             ]);
-            $data['image'] = $uploaded->getSecurePath();
+            $data['image'] = $result->getSecurePath();
         }
 
         Product::create($data);
@@ -79,10 +78,10 @@ class ProductController extends Controller
         $data['is_featured'] = $request->boolean('is_featured');
 
         if ($request->hasFile('image')) {
-            $uploaded = Cloudinary::upload($request->file('image')->getRealPath(), [
+            $result = cloudinary()->upload($request->file('image')->getRealPath(), [
                 'folder' => 'shop-dz/products',
             ]);
-            $data['image'] = $uploaded->getSecurePath();
+            $data['image'] = $result->getSecurePath();
         }
 
         $product->update($data);
