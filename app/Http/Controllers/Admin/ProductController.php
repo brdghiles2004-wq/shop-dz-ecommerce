@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -31,20 +32,27 @@ class ProductController extends Controller
             'price'       => 'required|numeric|min:0',
             'sale_price'  => 'nullable|numeric|min:0',
             'stock'       => 'required|integer|min:0',
-            'image'       => 'nullable|image|max:4096',
-            'is_active'   => 'boolean',
-            'is_featured' => 'boolean',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'is_active'   => 'sometimes|boolean',
+            'is_featured' => 'sometimes|boolean',
         ]);
 
-        $data['slug']        = Str::slug($request->name);
-        $data['is_active']   = $request->boolean('is_active');
+        $data['slug'] = Str::slug($request->name);
+        $data['is_active'] = $request->boolean('is_active');
         $data['is_featured'] = $request->boolean('is_featured');
 
+        // 🔥 DEBUG (اختياري وقت المشاكل)
+        // dd($request->hasFile('image'), $request->file('image'));
+
         if ($request->hasFile('image')) {
-            $result = cloudinary()->upload($request->file('image')->getRealPath(), [
+
+            $file = $request->file('image');
+
+            $uploaded = cloudinary()->upload($file->getRealPath(), [
                 'folder' => 'shop-dz/products',
             ]);
-            $data['image'] = $result->getSecurePath();
+
+            $data['image'] = $uploaded->getSecurePath();
         }
 
         Product::create($data);
@@ -69,19 +77,23 @@ class ProductController extends Controller
             'price'       => 'required|numeric|min:0',
             'sale_price'  => 'nullable|numeric|min:0',
             'stock'       => 'required|integer|min:0',
-            'image'       => 'nullable|image|max:4096',
-            'is_active'   => 'boolean',
-            'is_featured' => 'boolean',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'is_active'   => 'sometimes|boolean',
+            'is_featured' => 'sometimes|boolean',
         ]);
 
-        $data['is_active']   = $request->boolean('is_active');
+        $data['is_active'] = $request->boolean('is_active');
         $data['is_featured'] = $request->boolean('is_featured');
 
         if ($request->hasFile('image')) {
-            $result = cloudinary()->upload($request->file('image')->getRealPath(), [
+
+            $file = $request->file('image');
+
+            $uploaded = cloudinary()->upload($file->getRealPath(), [
                 'folder' => 'shop-dz/products',
             ]);
-            $data['image'] = $result->getSecurePath();
+
+            $data['image'] = $uploaded->getSecurePath();
         }
 
         $product->update($data);
@@ -93,6 +105,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+
         return redirect()->route('admin.products.index')
             ->with('success', 'Produit supprimé.');
     }
