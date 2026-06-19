@@ -84,4 +84,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/stats', [StatsController::class, 'index'])->name('stats.index');
     Route::get('/users', [UsersController::class, 'index'])->name('users.index');
 });
+
+Route::get('/test-cloudinary', function () {
+    dd(env('CLOUDINARY_URL'));
+});
 require __DIR__.'/auth.php';
